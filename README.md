@@ -44,8 +44,6 @@ Reporter can also be used from Python:
 	my_reporter.read(url='http://example.com')
 	print my_reporter.report_news()
 
-Please note that Reporter is not (yet) a Python package.
-
 
 Scoring algorithm
 -----------------
