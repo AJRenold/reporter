@@ -49,12 +49,12 @@ Scoring algorithm
 -----------------
 
 To extract the main text from an HTML document, Reporter gives each HTML
-tag (e.g, DIV, H1, and P) a score. The text contained in the tag with
+tag (e.g., DIV, H1, and P) a score. The text contained in the tag with
 the highest score is returned as the main text of the news article.
 
 The main part of the scoring algorithm is based on traversing the
 parsed HTML and works as follows. Reporter traverses the HTML in
-reverse order, i.e., it starts at the leafs of the DOM tree. Each tag
+reverse order, i.e., it starts at the leaves of the DOM tree. Each tag
 is scored either as a paragraph or as a container. A tag is considered
 to be a paragraph (in the abstract sense, not in the P sense) when it
 contains more than 10 characters\*, otherwise it is considered to be a
