@@ -117,7 +117,8 @@ class Reporter(object):
 			tag['href'] = urlparse.urljoin(url, tag['href'])
 
 		for tag in soup.findAll('img', href=True):
-			tag['src'] = urlparse.urljoin(url, tag['src'])
+			if 'src' in tag:
+				tag['src'] = urlparse.urljoin(url, tag['src'])
 
 
 	def guess_base_url(self,soup):
