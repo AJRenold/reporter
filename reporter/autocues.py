@@ -9,42 +9,42 @@ from evaluators import *
 
 # Triggers:
 (
-        HTML,
-        PRE_TRAVERSAL,
-        EVAL_PARAGRAPH,
-        EVAL_CONTAINER,
-        POST_TRAVERSAL,
-        NEWS_CONTAINER,
-        NEWS_TEXT,
+		HTML,
+		PRE_TRAVERSAL,
+		EVAL_PARAGRAPH,
+		EVAL_CONTAINER,
+		POST_TRAVERSAL,
+		NEWS_CONTAINER,
+		NEWS_TEXT,
 ) = tuple(2**i for i in range(0,7))
 
 
 class Autocue(list):
 
-    def execute(self, tag, trigger):
+	def execute(self, tag, trigger):
 
-        if isinstance(tag, element.Tag):
-            # apply to tag
+		if isinstance(tag, element.Tag):
+			# apply to tag
 
-            for (s, t) in self:
-                if trigger & t != 0:
-                    if isinstance(s, Selector):
-                        s.select(tag)
-                    elif isinstance(s, Actor):
-                        SingleTagSelector(s).select(tag)
-                    elif isinstance(s, Evaluator):
-                        SingleTagSelector(Scorer(s)).select(tag)
-                    else:
-                        pass
+			for (s, t) in self:
+				if trigger & t != 0:
+					if isinstance(s, Selector):
+						s.select(tag)
+					elif isinstance(s, Actor):
+						SingleTagSelector(s).select(tag)
+					elif isinstance(s, Evaluator):
+						SingleTagSelector(Scorer(s)).select(tag)
+					else:
+						pass
 
-        else:
-            # apply to text
+		else:
+			# apply to text
 
-            text = tag
-            for (s, t) in self:
-                if trigger & t != 0:
-                    text = s.act(text)
-            return text
+			text = tag
+			for (s, t) in self:
+				if trigger & t != 0:
+					text = s.act(text)
+			return text
 
 
 
