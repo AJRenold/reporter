@@ -1,21 +1,18 @@
 #!/usr/bin/python2.7
 
 import sys
-import re
 import argparse
-import fileinput
 import requests
 import codecs
 from os import path, listdir, makedirs
-from copy import deepcopy
 
-from bs4 import BeautifulSoup, Comment, NavigableString
+from bs4 import BeautifulSoup, NavigableString
 import urlparse
 
 from collections import Counter
 
 from autocues import *
-from core import get_tag_with_max_score, get_total_score, style_all_tags
+from core import get_tag_with_max_score, style_all_tags
 	
 
 class Reporter(object):
@@ -30,7 +27,6 @@ class Reporter(object):
 			self.soup = soup
 		else:
 			if html is not None:
-				print "making soup"
 				try:
 					self.soup = self._get_soup(html)
 				except TypeError:
@@ -45,11 +41,7 @@ class Reporter(object):
 				else:
 					self.soup = None
 					
-		print "making url"
-		
 		self.make_urls_absolute(self.soup, url)
-
-		print "pre traversal"
 		self.autocue.execute(self.soup, PRE_TRAVERSAL)
 
 		# We work our way up the DOM
@@ -69,9 +61,7 @@ class Reporter(object):
 
 			self.autocue.execute(tag, evaluate_as)
 
-		print "post traversal"
 		self.autocue.execute(self.soup, POST_TRAVERSAL)
-		print "max score"
 		self.news_container = get_tag_with_max_score(self.soup)
 		return True
 
