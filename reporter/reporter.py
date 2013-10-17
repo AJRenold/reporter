@@ -87,7 +87,6 @@ class Reporter(object):
 	def _get_soup(self, html):
 
 		html = self.autocue.execute(html, HTML)
-		print "call soup"
 		# Create a soup using the lxml parser
 		soup = BeautifulSoup(html, "lxml")
 
