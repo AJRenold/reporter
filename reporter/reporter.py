@@ -18,6 +18,7 @@ from core import get_tag_with_max_score, style_all_tags
 class Reporter(object):
 
   news_container = None
+  self.last_url = ''
 
   def read(self, url=None, html=None, soup=None, autocue=default_autocue):
 
@@ -87,9 +88,8 @@ class Reporter(object):
     self.autocue.execute(self.news_container, NEWS_CONTAINER)
     text = self.news_container.get_text()
     text = self.autocue.execute(text, NEWS_TEXT)
-    if self.last_url:
-        url = self.last_url
-        self.last_url = ''
+    url = self.last_url
+    self.last_url = ''
     return url, text
 
 
