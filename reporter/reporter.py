@@ -34,6 +34,9 @@ class Reporter(object):
       else:
         if url is not None:
           r = requests.get(url)
+          print r.headers['content-type']
+          self.is_html = 'text/html' in r.headers['content-type']
+          print 'read says', self.is_html
           html = r.content
           self.last_url = r.url
 
@@ -84,8 +87,9 @@ class Reporter(object):
     self.autocue.execute(self.news_container, NEWS_CONTAINER)
     text = self.news_container.get_text()
     text = self.autocue.execute(text, NEWS_TEXT)
-    url = self.last_url
-    self.last_url = ''
+    if self.last_url:
+        url = self.last_url
+        self.last_url = ''
     return url, text
 
 
