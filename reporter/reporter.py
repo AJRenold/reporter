@@ -18,11 +18,11 @@ from core import get_tag_with_max_score, style_all_tags
 class Reporter(object):
 
   news_container = None
-  self.last_url = ''
 
   def read(self, url=None, html=None, soup=None, autocue=default_autocue):
 
     self.autocue = autocue
+    self.last_url = ''
 
     if soup is not None:
       self.soup = soup
